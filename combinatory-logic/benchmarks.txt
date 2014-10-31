@@ -1,0 +1,58 @@
+Running time for test "Fixpoint-combinator-self-app" under three implementations of the combinatory logic code.
+All timings under Vicare Scheme, using (optimize-level 2), on a MacBook Pro with a 2.8 GHz Core i7 and 16 GB 1600 MHz DDR3 RAM, under OS X 10.8.5
+
+cl.scm
+
+running stats for (test "Fixpoint-combinator-self-app" (run 1 (Y) (fresh (?) (eigen (x) (== `(,? ,?) Y) (->wo `(,Y ,x) `(,x (,Y ,x)))))) '((((S (S (K (S I)))) I) ((S (S (K (S I)))) I)))):
+     429 collections
+     22710 ms elapsed cpu time, including 9257 ms collecting
+     22711 ms elapsed real time, including 9258 ms collecting
+     3595894560 bytes allocated
+
+
+cl-pairs.scm
+
+running stats for (test "Fixpoint-combinator-self-app" (run 1 (Y) (fresh (?) (eigen (x) (== `(,? unquote ?) Y) (->wo `(,Y unquote x) `(,x ,Y unquote x))))) '((((S S K S . I) . I) (S S K S . I) . I))):
+    422 collections
+    21490 ms elapsed cpu time, including 9436 ms collecting
+    21490 ms elapsed real time, including 9438 ms collecting
+    3531069152 bytes allocated     
+
+
+short-cl.scm
+
+running stats for (test "Fixpoint-combinator-self-app" (run 1 (Y) (fresh (?) (eigen (x) (== `(,? ,?) Y) (->wo `(,Y ,x) `(,x (,Y ,x)))))) '((((S (S (K (S I)))) I) ((S (S (K (S I)))) I)))):
+     891 collections
+     63316 ms elapsed cpu time, including 23759 ms collecting
+     63315 ms elapsed real time, including 23762 ms collecting
+     7470057152 bytes allocated
+
+
+equivalent-short-cl.scm
+
+running stats for (test "Fixpoint-combinator-self-app" (run 1 (Y) (fresh (?) (eigen (x) (== `(,? ,?) Y) (->wo `(,Y ,x) `(,x (,Y ,x)))))) '((((S (S (K (S I)))) I) ((S (S (K (S I)))) I)))):
+    651 collections
+    35833 ms elapsed cpu time, including 16776 ms collecting
+    35834 ms elapsed real time, including 16779 ms collecting
+    5456192048 bytes allocated
+
+
+
+Running time for "Fixpoint-combinator":
+
+ cl.scm
+
+running stats for (test "Fixpoint-combinator" (run 1 (Y) (eigen (x) (->wo `(,Y ,x) `(,x (,Y ,x))))) '(((S I) (((S (S (K (S I)))) I) ((S (S (K (S I)))) I))))):
+    8730 collections
+    938642 ms elapsed cpu time, including 684205 ms collecting
+    947858 ms elapsed real time, including 692507 ms collecting
+    73163802192 bytes allocated
+
+
+cl-pairs.scm
+
+running stats for (test "Fixpoint-combinator" (run 1 (Y) (eigen (x) (->wo `(,Y unquote x) `(,x ,Y unquote x)))) '(((S I) (((S (S (K (S I)))) I) ((S (S (K (S I)))) I))))):
+    8635 collections
+    871838 ms elapsed cpu time, including 643697 ms collecting
+    871850 ms elapsed real time, including 643739 ms collecting
+    72364650688 bytes allocated
